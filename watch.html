@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Band 4 | RedStore</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffe5ec, #fff);
+      color: #333;
+    }
+
+    .navbar {
+      background: #fff;
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ff4d4d;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: #ff4d4d;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.8em;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: block;
+      }
+    }
+
+    .hero-banner {
+      background: url('images/image/wow.jpg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero-banner h1 {
+      font-size: 4em;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .hero-banner p {
+      font-size: 1.5em;
+      margin-top: 10px;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      gap: 40px;
+    }
+
+    .product-img {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+      animation: slideInLeft 1.5s ease-in-out;
+    }
+
+    .product-img img {
+      width: 90%;
+      max-width: 400px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .product-info {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px 40px;
+      animation: slideInRight 1.5s ease-in-out;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .product-info h3 {
+      color: #777;
+      font-size: 1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .product-info h1 {
+      font-size: 3em;
+      margin: 10px 0;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .product-info p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin-top: 20px;
+      color: #444;
+    }
+
+    .video-section {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+    }
+
+    .video-section h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .video-section p {
+      font-size: 1.05em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .video-wrapper {
+      width: 300px;
+      height: 300px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .specs {
+      padding: 60px 20px;
+      background-color: #fff0f0;
+      text-align: center;
+    }
+
+    .specs h2 {
+      font-size: 2em;
+      color: #111;
+      margin-bottom: 40px;
+    }
+
+    .spec-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .spec-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .spec-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .spec-box i {
+      font-size: 2em;
+      color: #ff4d4d;
+      margin-bottom: 10px;
+    }
+
+    .spec-box h4 {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .spec-box p {
+      font-size: 0.95em;
+      color: #666;
+    }
+
+    .review-section {
+      background: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .review-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .review {
+      background: #fff5f5;
+      padding: 20px;
+      max-width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .review p {
+      font-size: 0.95em;
+      margin: 10px 0;
+    }
+
+    .quote {
+      font-size: 2em;
+      color: #ff4d4d;
+    }
+
+    .contact-section {
+      padding: 60px 20px;
+      background-color: #fff0f0;
+      text-align: center;
+    }
+
+    .contact-section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #111;
+    }
+
+    .contact-form {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input[type="email"],
+    .contact-form input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .contact-form .login-btn {
+      background-color: #ff4d4d;
+      color: white;
+    }
+
+    .contact-form .logout-btn {
+      background-color: #333;
+      color: white;
+    }
+
+    .footer {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 30px 20px 10px;
+    }
+
+    .disclaimer {
+      font-size: 0.85em;
+      color: #bbb;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .container { flex-direction: column; text-align: center; }
+      .product-info { padding: 30px 20px; }
+      .contact-form { width: 100%; }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">RedStore</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+      <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    </div>
+  </nav>
+
+  <section class="hero-banner" id="home">
+    <h1>SUPER TITANIUM</h1>
+    <p>Lightweight. Durable. Timeless Innovation.</p>
+  </section>
+
+  <section class="container" id="products">
+    <div class="product-img">
+      <img src="images/image/apple.jpeg" alt="Smart Band 4" />
+    </div>
+    <div class="product-info">
+      <h3>Exclusively Available</h3>
+      <h1>Smart Band 4</h1>
+      <p>
+        Meet the all-new Smart Band 4 — your daily health companion! It tracks heart rate, sleep, steps and more.
+        Stylish, durable, and water-resistant with a bright AMOLED display.
+      </p>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <h2>See It in Action</h2>
+    <p>A quick look at how Smart Band 4 fits your lifestyle.</p>
+    <div class="video-wrapper">
+      <video autoplay muted loop controls>
+        <source src="images/image/ghadi.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <section class="specs" id="features">
+    <h2>Top Features</h2>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <i class="fas fa-heartbeat"></i>
+        <h4>Heart Rate</h4>
+        <p>Real-time heart monitoring with alerts.</p>
+      </div>
+      <div class="spec-box">
+        <i class="fas fa-walking"></i>
+        <h4>Activity</h4>
+        <p>Step and workout tracking made easy.</p>
+      </div>
+      <div class="spec-box">
+        <i class="fas fa-bed"></i>
+        <h4>Sleep Monitor</h4>
+        <p>Analyze your sleep patterns automatically.</p>
+      </div>
+      <div class="spec-box">
+        <i class="fas fa-water"></i>
+        <h4>Waterproof</h4>
+        <p>Swim-friendly, sweatproof design.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="review-section" id="reviews">
+    <div class="review-boxes">
+      <div class="review">
+        <div class="quote">❝</div>
+        <p>Looks great, feels light, and works like a charm. Love it!</p>
+      </div>
+      <div class="review">
+        <div class="quote">❝</div>
+        <p>Really impressed by battery and features. Recommended!</p>
+      </div>
+      <div class="review">
+        <div class="quote">❝</div>
+        <p>Tracks sleep and steps perfectly. Amazing product!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Contact Form Section -->
+  <section class="contact-section" id="footer">
+    <h2>Contact Information</h2>
+    <form class="contact-form">
+      <input type="email" placeholder="Enter your email" required />
+      <input type="password" placeholder="Enter your password" required />
+      <button type="submit" class="login-btn">Log In & Pay</button>
+      <button type="button" class="logout-btn" onclick="alert('Logged out!')">Log Out</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Gobinda Pandey. All Rights Reserved.</p>
+    <div class="disclaimer">
+      Disclaimer: Product images and content are for demonstration purposes only.
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
