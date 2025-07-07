@@ -1,4 +1,5 @@
 # 🛒 Redstore E-commerce Website
+jazzy-starlight-cb2c48.netlify.app (Open link to view the project)
 
 Redstore is a fully responsive e-commerce website project developed using **HTML**, **CSS**, and a touch of **JavaScript**. It offers a clean, modern design and mimics real-world e-commerce platforms with features like product listings, navigation, customer reviews, and authentication pages.
 
